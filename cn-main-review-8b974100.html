@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蜂鸟电竞 · 站点知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #faf7f2;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #2e2b28;
+            padding: 2rem 1.2rem;
+        }
+
+        .page-container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: #fffcf9;
+            padding: 2.8rem 2.2rem;
+            border-radius: 32px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.6rem;
+            }
+            .page-container {
+                padding: 1.8rem 1.2rem;
+                border-radius: 20px;
+            }
+        }
+
+        /* 目录感布局 —— 类文章轴 */
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #a0876f;
+            margin-bottom: 0.4rem;
+            border-left: 3px solid #dac4ae;
+            padding-left: 12px;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 450;
+            letter-spacing: -0.02em;
+            color: #2a231f;
+            margin: 0.5rem 0 1.6rem 0;
+            line-height: 1.2;
+            border-bottom: 1px solid #efe7de;
+            padding-bottom: 0.8rem;
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 420;
+            color: #3d322b;
+            margin: 2.2rem 0 0.8rem 0;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #4d3f36;
+            margin: 1.6rem 0 0.4rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .intro-card {
+            background: #f3efe9;
+            border-radius: 20px;
+            padding: 1.4rem 1.8rem;
+            margin: 1.6rem 0;
+            border-left: 5px solid #c7b19b;
+            font-size: 0.98rem;
+        }
+
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-box {
+            background: #f7f1ea;
+            border-radius: 16px;
+            padding: 1.2rem 1.6rem;
+            margin: 2rem 0;
+            border: 1px solid #e3d6ca;
+            position: relative;
+        }
+
+        .highlight-box::before {
+            content: "📌 提示";
+            display: block;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: #8e7a68;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        blockquote {
+            border-left: 5px solid #d4c0ac;
+            background: #f6f1eb;
+            margin: 1.8rem 0;
+            padding: 1rem 1.6rem;
+            color: #3c332d;
+            font-style: normal;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .faq-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 1.8rem 0;
+        }
+
+        .faq-item {
+            background: #faf5ef;
+            padding: 0.8rem 1.4rem;
+            border-radius: 40px;
+            border: 1px solid #ede3d8;
+            font-size: 0.95rem;
+        }
+
+        .faq-item strong {
+            color: #5f4d3e;
+            margin-right: 6px;
+        }
+
+        a {
+            color: #7b5f47;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #dac8b6;
+            transition: border 0.2s, color 0.2s;
+        }
+
+        a:hover {
+            color: #4a372a;
+            border-bottom-color: #7b5f47;
+        }
+
+        .scene-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.6rem 0 0.6rem;
+        }
+
+        @media (max-width: 520px) {
+            .scene-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scene-card {
+            background: #f9f5f0;
+            border-radius: 18px;
+            padding: 1.2rem 1.2rem 0.8rem;
+            border: 1px solid #ece0d4;
+        }
+
+        .scene-card h4 {
+            font-weight: 450;
+            color: #4d3b2e;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .scene-card p {
+            font-size: 0.92rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.2rem;
+            margin: 1.2rem 0 0.8rem;
+            padding: 0.8rem 0;
+            border-top: 1px dashed #e1d3c6;
+            border-bottom: 1px dashed #e1d3c6;
+        }
+
+        .info-tag {
+            background: #e9dfd3;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #3e342c;
+        }
+
+        .footnote {
+            margin-top: 2.8rem;
+            font-size: 0.85rem;
+            color: #7a6b5f;
+            border-top: 1px solid #ede4da;
+            padding-top: 1.4rem;
+            text-align: left;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ece2d6;
+            margin: 1.8rem 0;
+        }
+
+        .inline-link-sentence {
+            background: #f7f0e9;
+            border-radius: 40px;
+            padding: 0.1rem 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+
+    <!-- 目录感标头 -->
+    <div class="section-label">索引 · 站点介绍</div>
+    <h1>蜂鸟电竞 · 知识库入口</h1>
+
+    <!-- 介绍区（偏生活化正式感） -->
+    <div class="intro-card">
+        <p><strong>蜂鸟电竞</strong> 是一个以数据为支撑、赛事内容为主的平台。很多朋友第一次接触时，会好奇它的定位是否清晰、信息是否可靠。这篇页面就像一份小小的“站点说明书”，把关于 <a href="https://cn-main-fnscore.com">蜂鸟电竞</a> 值得了解的部分整理出来——没有夸大，只有实在的梳理。</p>
+        <p>不论你是打算用它查赛程、看实时数据，还是单纯想了解这个站点能做什么，下面的几个模块可以帮你快速建立印象。</p>
+    </div>
+
+    <!-- 说明区：站点特性 -->
+    <h2>▍ 关于站点 · 几个基本事实</h2>
+    <p>蜂鸟电竞主要围绕电竞赛事信息展开，内容覆盖主流项目的数据呈现、赛程追踪以及部分赛事背景资料。与很多娱乐向站点不同，它更偏向信息整合与展示，界面风格也相对克制。</p>
+
+    <div class="highlight-box">
+        <p><strong>可信说明</strong> —— 站点数据来源相对透明，更新频率按赛事节奏走。日常使用中，可以把它当作一个信息参考点，但最终判断仍需结合多方渠道。这也是所有数据类平台该有的共识。</p>
+    </div>
+
+    <!-- 特点卡片（轻量化） -->
+    <h3>特点一览</h3>
+    <div class="scene-grid">
+        <div class="scene-card">
+            <h4>📋 赛事覆盖</h4>
+            <p>多项目主流联赛，包括实时比分、对阵、历史记录。数据维度偏向实用，不堆砌复杂指标。</p>
+        </div>
+        <div class="scene-card">
+            <h4>🧭 界面逻辑</h4>
+            <p>分区比较直接，首页展示核心赛事，没有太多干扰模块。适合快速查找当前热门对局。</p>
+        </div>
+        <div class="scene-card">
+            <h4>🔁 更新节奏</h4>
+            <p>数据随比赛进程实时变化，赛后也会保留基础记录。适合赛中和赛后复盘查阅。</p>
+        </div>
+        <div class="scene-card">
+            <h4>⚖️ 中立定位</h4>
+            <p>不渲染情绪、不引导投注，内容定位偏向资讯与数据工具，风格比较稳重。</p>
+        </div>
+    </div>
+
+    <!-- 引用块 / 个人化语气 -->
+    <blockquote>
+        「第一次打开时，感觉页面比想象中安静——没有弹窗，没有杂音，就是赛程、数据和筛选。这种专注感反而让人愿意多停留一会儿。」
+    </blockquote>
+
+    <!-- 信息区：适用场景 + 提示 -->
+    <h2>▍ 哪些场景适合打开它</h2>
+    <p>如果你是赛事爱好者、数据型观众，或者只是想找个干净的地方看一眼今天的赛程，<a href="https://cn-main-fnscore.com">蜂鸟电竞</a> 可以成为其中一个选择。以下几类情况比较匹配：</p>
+    <ul style="margin-left: 1.4rem; margin-bottom: 1.8rem; list-style-type: '· '; color: #3e332b;">
+        <li style="margin-bottom: 0.4rem;">赛前快速确认对阵双方与开赛时间；</li>
+        <li style="margin-bottom: 0.4rem;">比赛中刷新实时比分，不依赖直播流；</li>
+        <li style="margin-bottom: 0.4rem;">赛后回顾基础数据，比如局内关键节点；</li>
+        <li style="margin-bottom: 0.4rem;">横向比较不同赛区的赛程安排。</li>
+    </ul>
+
+    <!-- 相关信息区：FAQ 摘要、轻量问答 -->
+    <h2>▍ 常见印象 · FAQ 摘要</h2>
+    <div class="faq-mini">
+        <div class="faq-item"><strong>Q：</strong> 数据准确吗？<br><span style="color: #5f4f42;">A：整体可靠，但极端实时场景可能存在细微延迟，建议配合官方源交叉验证。</span></div>
+        <div class="faq-item"><strong>Q：</strong> 需要注册才能用？<br><span style="color: #5f4f42;">A：大部分内容直接可见，无需登录。部分深度筛选可能需轻量账户，不影响基础浏览。</span></div>
+        <div class="faq-item"><strong>Q：</strong> 移动端体验如何？<br><span style="color: #5f4f42;">A：适配尚可，页面可缩放，关键信息在手机上也容易定位。</span></div>
+        <div class="faq-item"><strong>Q：</strong> 内容偏向哪些游戏？<br><span style="color: #5f4f42;">A：主要是主流战术竞技、MOBA、FPS 类赛事，覆盖面符合大众观赛习惯。</span></div>
+    </div>
+
+    <!-- 额外信息区：标签 + 相关备注 -->
+    <div class="info-row">
+        <span class="info-tag">赛事数据</span>
+        <span class="info-tag">赛程查询</span>
+        <span class="info-tag">实时比分</span>
+        <span class="info-tag">中立视角</span>
+    </div>
+
+    <!-- 提示区（差异化） -->
+    <div style="background: #f1eae1; border-radius: 28px; padding: 1.2rem 1.6rem; margin: 2rem 0 1.2rem;">
+        <p style="font-weight: 450; color: #4d3a2b; margin-bottom: 0.3rem;">💡 一点使用建议</p>
+        <p style="font-size: 0.95rem; margin-bottom: 0;">初次访问时，可以先扫一眼首页的赛事列表，再用顶部分类筛选具体项目。页面没有太多隐藏层级，大部分信息都在表面。如果发现某个数据有异常，可以稍后刷新或参考其他平台比对——这也是多平台对照的意义。</p>
+    </div>
+
+    <!-- 内嵌链接句子（自然嵌入，不出现点击/进入等词） -->
+    <p style="font-size: 0.98rem;">如果你还没试过，不妨把 <a href="https://cn-main-fnscore.com">蜂鸟电竞</a> 加入书签夹，下次看比赛时顺路打开，体验一下它的信息呈现方式。</p>
+
+    <!-- 结尾 / 页面底部 -->
+    <div class="footnote">
+        <span>本站介绍页 · 知识库式概览</span><br>
+        <span style="opacity: 0.7;">内容仅作信息参考，不构成任何形式的使用承诺或推荐。</span>
+    </div>
+
+</div>
+</body>
+</html>
